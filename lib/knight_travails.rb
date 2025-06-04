@@ -30,13 +30,20 @@ class KnightTravails
       [moveset[2],moveset[5]],[moveset[2],moveset[7]],
     ]
 
-    move_cordinates.each do |r,c|
+    move_cordinates.each do |r,c| #Generate all the in-bound moves on board
       @chess.board[r][c] = "M" if bounds.include?(r) &&  bounds.include?(c)
     end
   end
 
   def knight_moves(start,fin) #while start != fin
     generate_move(start) #Place knight on board find avaiable moves
+    move_arr = []
+    @chess.board.each_with_index do |r,r_in| #.index
+      r.each_with_index do |c,c_in|
+        move_arr << [r_in,c_in] if c == "M"
+      end
+    end
+    p move_arr
     #TODO - Somehow make start = the move that was made
     #TODO - First iterate through the actual board and find all the "M"s?
       #*For each "M" push the cordinate into an array?
