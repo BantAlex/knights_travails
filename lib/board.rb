@@ -1,7 +1,7 @@
 class Board
   attr_accessor :board
 
-  def initialize
+  def initialize(start)
     @board = [
     [nil,nil,nil,nil,nil,nil,nil,nil], #A=0
     [nil,nil,nil,nil,nil,nil,nil,nil], #B=1
@@ -12,6 +12,7 @@ class Board
     [nil,nil,nil,nil,nil,nil,nil,nil], #G=6
     [nil,nil,nil,nil,nil,nil,nil,nil]  #H=7
   ]
+  @board[start[0]][start[1]] = "K"
   @board
   end
 

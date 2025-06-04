@@ -5,13 +5,13 @@ require_relative 'board'
 class KnightTravails
 
   def initialize(start,fin)
-    @chess = Board.new
+    @chess = Board.new(start)
     knight_moves(start,fin)
     puts "You're already here!" if start == fin
   end
 
   def generate_move(start) #Maybe move "start" to init
-    @chess.board[start[0]][start[1]] = "K" #Place Knight On board
+    # @chess.board[start[0]][start[1]] = "K" #Place Knight On board
     bounds = (0..7)
     abort ("Invalid Option") unless start.all?{ |n| bounds.include?(n)}
 
@@ -38,15 +38,22 @@ class KnightTravails
   def knight_moves(start,fin) #while start != fin
     generate_move(start) #Place knight on board find avaiable moves
     move_arr = []
+
     @chess.board.each_with_index do |r,r_in| #.index
       r.each_with_index do |c,c_in|
         move_arr << [r_in,c_in] if c == "M"
       end
     end
     p move_arr
+    @chess.print_board
+    p "SPLITT"
+   @chess = Board.new(move_arr[0])
+   generate_move(move_arr[0])
+    # move_arr.each do |move|
+    #   @chess = Board.new(move)
+    #   @chess.print_board
+    # end
     #TODO - Somehow make start = the move that was made
-    #TODO - First iterate through the actual board and find all the "M"s?
-      #*For each "M" push the cordinate into an array?
     #TODO - Then itereate (recursivly?) over all the possible moves and keep count, returing the lease resistance
     @chess.print_board
   end
